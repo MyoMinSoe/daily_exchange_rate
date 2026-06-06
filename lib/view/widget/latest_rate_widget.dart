@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../../model/currencies_model.dart';
+import '../../model/latest_rate_model.dart';
+import 'rate_curency_card.dart';
+
+class LatestRateWidget extends StatelessWidget {
+  final LatestRateModel latestRates;
+  final CurrenciesModel? currencies;
+  const LatestRateWidget({
+    super.key,
+    required this.latestRates,
+    required this.currencies,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var dateTime = DateTime.fromMillisecondsSinceEpoch(
+      int.parse(latestRates.timestamp ?? '0') * 1000,
+    ).toLocal();
+
+    var time = DateFormat('MMMM d, yyyy - hh:mm a').format(dateTime);
+
+    return Column(
+      children: [
+        Text(
+          latestRates.info ?? 'No data available',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          latestRates.description ?? 'No data available',
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        const SizedBox(height: 16.0),
+        Text(
+          'နောက်ဆုံးရရှိထားသောအချိန်\n$time',
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+            height: 2,
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        RateCurencyCard(
+          currency: currencies?.currencies == null
+              ? 'N/A'
+              : '${currencies?.currencies?.uSD} - USD',
+          rate: '${latestRates.rates?.uSD} Ks',
+        ),
+        RateCurencyCard(
+          currency: currencies?.currencies == null
+              ? 'N/A'
+              : '${currencies?.currencies?.eUR} - EUR',
+          rate: '${latestRates.rates?.eUR} Ks',
+        ),
+        RateCurencyCard(
+          currency: currencies?.currencies == null
+              ? 'N/A'
+              : '${currencies?.currencies?.jPY} - JPY',
+          rate: '${latestRates.rates?.jPY} Ks',
+        ),
+        RateCurencyCard(
+          currency: currencies?.currencies == null
+              ? 'N/A'
+              : '${currencies?.currencies?.tHB} - THB',
+          rate: '${latestRates.rates?.tHB} Ks',
+        ),
+        RateCurencyCard(
+          currency: currencies?.currencies == null
+              ? 'N/A'
+              : '${currencies?.currencies?.sGD} - SGD',
+          rate: '${latestRates.rates?.sGD} Ks',
+        ),
+      ],
+    );
+  }
+}
