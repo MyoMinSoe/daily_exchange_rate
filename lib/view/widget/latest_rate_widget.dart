@@ -22,10 +22,11 @@ class LatestRateWidget extends StatelessWidget {
 
     var time = DateFormat('MMMM d, yyyy - hh:mm a').format(dateTime);
 
-    return Column(
+    return ListView(
       children: [
         Text(
           latestRates.info ?? 'No data available',
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.bold,
@@ -33,6 +34,7 @@ class LatestRateWidget extends StatelessWidget {
         ),
         Text(
           latestRates.description ?? 'No data available',
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 12,
             color: Theme.of(context).colorScheme.secondary,

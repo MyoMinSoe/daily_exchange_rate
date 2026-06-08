@@ -42,7 +42,7 @@ class _PopularScreenState extends ConsumerState<PopularScreen> {
     final latestRateState = ref.watch(latestRateProvider);
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5),
         width: size.width,
         height: size.height,
         child: Column(
@@ -63,9 +63,10 @@ class _PopularScreenState extends ConsumerState<PopularScreen> {
                 ),
               },
             ),
+            const SizedBox(height: 10),
             TextButton(
               onPressed: () => latestRateNotifier?.getLatestRates(),
-              child: const Text('နောက်ဆုံးနှုန်းများကို ပြန်လည်ရယူရန်'),
+              child: const Text('နှုန်းထားအသစ်များကို ပြန်လည်ရယူရန်'),
             ),
           ],
         ),
