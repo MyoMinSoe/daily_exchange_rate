@@ -14,7 +14,7 @@ class HomeScreen extends ConsumerWidget {
   Widget _getScreen(int index) => switch (index) {
     0 => const PopularScreen(),
     1 => const OthersScreen(),
-    2 => const OldRateScreen(),
+    2 => OldRateScreen(),
     _ => const PopularScreen(),
     // int() => PopularScreen(),
   };

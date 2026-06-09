@@ -19,7 +19,6 @@ class PopularScreen extends ConsumerStatefulWidget {
 }
 
 class _PopularScreenState extends ConsumerState<PopularScreen> {
-  LatestRateNotifier? latestRateNotifier;
   CurrenciesModel? currencies;
   ApiService apiService = ApiService();
   void getCurrencies() async {
@@ -30,7 +29,7 @@ class _PopularScreenState extends ConsumerState<PopularScreen> {
   initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      latestRateNotifier?.getLatestRates();
+      ref.read(latestRateProvider.notifier).getLatestRates();
       getCurrencies();
     });
   }
@@ -38,7 +37,6 @@ class _PopularScreenState extends ConsumerState<PopularScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    latestRateNotifier = ref.read(latestRateProvider.notifier);
     final latestRateState = ref.watch(latestRateProvider);
     return Scaffold(
       body: Container(
@@ -59,13 +57,15 @@ class _PopularScreenState extends ConsumerState<PopularScreen> {
                   ),
                 LatestRateError(message: String message) => FailedWidget(
                   message: message,
-                  onRetry: () => latestRateNotifier?.getLatestRates(),
+                  onRetry: () =>
+                      ref.read(latestRateProvider.notifier).getLatestRates(),
                 ),
               },
             ),
             SizedBox(height: 10.h),
             TextButton(
-              onPressed: () => latestRateNotifier?.getLatestRates(),
+              onPressed: () =>
+                  ref.read(latestRateProvider.notifier).getLatestRates(),
               child: const Text('နှုန်းထားအသစ်များကို ပြန်လည်ရယူရန်'),
             ),
           ],

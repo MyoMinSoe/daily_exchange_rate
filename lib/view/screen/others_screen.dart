@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../model/currencies_model.dart';
 import '../../model/latest_rate_model.dart';
@@ -18,7 +19,6 @@ class OthersScreen extends ConsumerStatefulWidget {
 }
 
 class _OthersScreenState extends ConsumerState<OthersScreen> {
-  LatestRateNotifier? latestRateNotifier;
   CurrenciesModel? currencies;
   ApiService apiService = ApiService();
   void getCurrencies() async {
@@ -29,26 +29,51 @@ class _OthersScreenState extends ConsumerState<OthersScreen> {
   initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      latestRateNotifier?.getLatestRates();
+      ref.read(latestRateProvider.notifier).getLatestRates();
       getCurrencies();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    latestRateNotifier = ref.read(latestRateProvider.notifier);
+    final Size size = MediaQuery.of(context).size;
     final latestRateState = ref.watch(latestRateProvider);
     return Scaffold(
-      body: switch (latestRateState) {
-        LatestRateInitial() => const LoadingWidget(),
-        LatestRateLoading() => const LoadingWidget(),
-        LatestRateSuccess(latestRates: LatestRateModel latestRates) =>
-          RateListWidget(latestRates: latestRates, currencies: currencies),
-        LatestRateError(message: String message) => FailedWidget(
-          message: message,
-          onRetry: () => latestRateNotifier?.getLatestRates(),
+      body: Container(
+        padding: const EdgeInsets.all(16.0).w,
+        width: size.width.w,
+        height: size.height.h,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              child: switch (latestRateState) {
+                LatestRateInitial() => const LoadingWidget(),
+                LatestRateLoading() => const LoadingWidget(),
+                LatestRateSuccess(latestRates: LatestRateModel latestRates) =>
+                  RateListWidget(
+                    latestRates: latestRates,
+                    currencies: currencies,
+                    getRate: () {
+                      ref.read(latestRateProvider.notifier).getLatestRates();
+                    },
+                  ),
+                LatestRateError(message: String message) => FailedWidget(
+                  message: message,
+                  onRetry: () =>
+                      ref.read(latestRateProvider.notifier).getLatestRates(),
+                ),
+              },
+            ),
+            SizedBox(height: 5.h),
+            TextButton(
+              onPressed: () =>
+                  ref.read(latestRateProvider.notifier).getLatestRates(),
+              child: const Text('နှုန်းထားအသစ်များကို ပြန်လည်ရယူရန်'),
+            ),
+          ],
         ),
-      },
+      ),
     );
   }
 }
