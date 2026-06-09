@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppThemes {
   static final ThemeData lightTheme = ThemeData(
@@ -17,7 +18,9 @@ class AppThemes {
 
     cardTheme: CardThemeData(
       elevation: 4.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0).w,
+      ),
     ),
   );
 
@@ -37,7 +40,9 @@ class AppThemes {
 
     cardTheme: CardThemeData(
       elevation: 4.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0).w,
+      ),
     ),
   );
 }

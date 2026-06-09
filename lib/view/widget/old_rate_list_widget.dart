@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../model/currencies_model.dart';
 import '../../model/old_rate_model.dart';
@@ -19,16 +20,16 @@ class OldRateListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.all(16.0),
-      width: size.width,
-      height: size.height,
+      padding: EdgeInsets.all(16).w,
+      width: size.width.w,
+      height: size.height.h,
       child: Column(
         children: [
           Text(
             '$findDate ရဲ့ငွေလဲနှုန်းများ',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           Expanded(
             child: ListView(
               children: [

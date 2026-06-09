@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../theme_data/theme_provider.dart';
@@ -16,9 +17,9 @@ class BottomNavigatorBar extends ConsumerWidget {
     final isDarkMode = themeMode == ThemeMode.dark;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Daily Exchange Rate',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
         ),
         actions: [
           IconButton(

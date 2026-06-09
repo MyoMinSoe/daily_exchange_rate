@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../utility/theme_data/theme_provider.dart';
+import '../../view_model/bottom_nav_index.dart';
 import 'old_rate_screen.dart';
 import 'others_screen.dart';
 import 'popular_screen.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
+  Widget _getScreen(int index) => switch (index) {
+    0 => const PopularScreen(),
+    1 => const OthersScreen(),
+    2 => const OldRateScreen(),
+    _ => const PopularScreen(),
+    // int() => PopularScreen(),
+  };
 
   @override
-  ConsumerState<HomeScreen> createState() => _BottomHomeState();
-}
-
-class _BottomHomeState extends ConsumerState<HomeScreen> {
-  int index = 0;
-  List<Widget> screens = [PopularScreen(), OthersScreen(), OldRateScreen()];
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ThemeMode themeMode = ref.watch(themeProvider);
     final isDarkMode = themeMode == ThemeMode.dark;
+    final currentIndex = ref.watch(bottomNavIndexProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Daily Exchange Rate',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
         ),
         actions: [
           IconButton(
@@ -36,13 +39,11 @@ class _BottomHomeState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
-      body: screens[index],
+      body: _getScreen(currentIndex),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index,
+        currentIndex: currentIndex,
         onTap: (int newIndex) {
-          setState(() {
-            index = newIndex;
-          });
+          ref.read(bottomNavIndexProvider.notifier).setIndex(newIndex);
         },
         items: const [
           BottomNavigationBarItem(

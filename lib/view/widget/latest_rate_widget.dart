@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 import '../../model/currencies_model.dart';
@@ -36,21 +37,21 @@ class LatestRateWidget extends StatelessWidget {
           latestRates.description ?? 'No data available',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 12.sp,
             color: Theme.of(context).colorScheme.secondary,
           ),
         ),
-        const SizedBox(height: 16.0),
+        SizedBox(height: 16.h),
         Text(
           'နောက်ဆုံးရရှိထားသောအချိန်\n$time',
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 16.0,
+          style: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.bold,
-            height: 2,
+            height: 2.h,
           ),
         ),
-        const SizedBox(height: 10.0),
+        SizedBox(height: 10.h),
         RateCurencyCard(
           currency: currencies?.currencies == null
               ? 'N/A'

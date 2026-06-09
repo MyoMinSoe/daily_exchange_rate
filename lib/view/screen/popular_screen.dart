@@ -1,6 +1,7 @@
 import 'package:daily_exchange_rate/view_model/riverpod_latest_rate/latest_rate_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../model/currencies_model.dart';
 import '../../model/latest_rate_model.dart';
@@ -23,7 +24,6 @@ class _PopularScreenState extends ConsumerState<PopularScreen> {
   ApiService apiService = ApiService();
   void getCurrencies() async {
     currencies = await apiService.getCurrencies();
-    setState(() {});
   }
 
   @override
@@ -42,9 +42,9 @@ class _PopularScreenState extends ConsumerState<PopularScreen> {
     final latestRateState = ref.watch(latestRateProvider);
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5),
-        width: size.width,
-        height: size.height,
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+        width: size.width.w,
+        height: size.height.h,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -63,7 +63,7 @@ class _PopularScreenState extends ConsumerState<PopularScreen> {
                 ),
               },
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
             TextButton(
               onPressed: () => latestRateNotifier?.getLatestRates(),
               child: const Text('နှုန်းထားအသစ်များကို ပြန်လည်ရယူရန်'),

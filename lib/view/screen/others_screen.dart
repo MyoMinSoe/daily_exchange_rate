@@ -23,7 +23,6 @@ class _OthersScreenState extends ConsumerState<OthersScreen> {
   ApiService apiService = ApiService();
   void getCurrencies() async {
     currencies = await apiService.getCurrencies();
-    setState(() {});
   }
 
   @override

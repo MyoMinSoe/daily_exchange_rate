@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../model/currencies_model.dart';
 import '../../model/latest_rate_model.dart';
@@ -25,13 +26,13 @@ class RateListWidget extends StatelessWidget {
           Text(
             'နောက်ဆုံးရရှိထားသောနှုန်းထားများ',
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16.0,
+            style: TextStyle(
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
-              height: 2,
+              height: 2.h,
             ),
           ),
-          const SizedBox(height: 10.0),
+          SizedBox(height: 10.h),
           Expanded(
             child: ListView(
               children: [

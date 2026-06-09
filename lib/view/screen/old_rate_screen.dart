@@ -1,6 +1,7 @@
 import 'package:daily_exchange_rate/view_model/riverpod_old_rate/old_rate_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 import '../../model/currencies_model.dart';
@@ -41,7 +42,6 @@ class _OldRateScreenState extends ConsumerState<OldRateScreen> {
   ApiService apiService = ApiService();
   void getCurrencies() async {
     currencies = await apiService.getCurrencies();
-    setState(() {});
   }
 
   void getOldRateList() {
@@ -55,9 +55,9 @@ class _OldRateScreenState extends ConsumerState<OldRateScreen> {
     oldRateNotifier = ref.read(oldRateProvider.notifier);
     final oldRateState = ref.watch(oldRateProvider);
     return Container(
-      padding: const EdgeInsets.all(16.0),
-      width: size.width,
-      height: size.height,
+      padding: const EdgeInsets.all(16.0).w,
+      width: size.width.w,
+      height: size.height.h,
       child: Column(
         children: [
           TextButton.icon(
@@ -65,7 +65,7 @@ class _OldRateScreenState extends ConsumerState<OldRateScreen> {
             icon: const Icon(Icons.calendar_today),
             label: Text(
               'သိလိုသောနေ့ရက်ရွေးချယ်ပါ',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
             ),
           ),
 

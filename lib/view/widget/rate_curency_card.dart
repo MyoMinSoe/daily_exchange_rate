@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RateCurencyCard extends StatelessWidget {
   final String? currency;
@@ -16,7 +17,7 @@ class RateCurencyCard extends StatelessWidget {
       elevation: 4.0,
       color: Theme.of(context).colorScheme.secondary,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
