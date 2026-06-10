@@ -32,6 +32,8 @@ class BottomNavigatorBar extends ConsumerWidget {
       ),
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
+        // backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.5),
+        height: 51.h,
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: navigationShell.goBranch,
         destinations: destinations

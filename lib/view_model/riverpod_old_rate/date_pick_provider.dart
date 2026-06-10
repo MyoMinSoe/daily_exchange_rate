@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class DatePickProvider extends Notifier<String?> {
   @override
   String? build() {
-    return '';
+    return null;
   }
 
   void setDate(String date) {

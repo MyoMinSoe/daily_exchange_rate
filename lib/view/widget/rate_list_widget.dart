@@ -8,12 +8,10 @@ import 'rate_curency_card.dart';
 class RateListWidget extends StatelessWidget {
   final LatestRateModel latestRates;
   final CurrenciesModel? currencies;
-  final Function() getRate;
   const RateListWidget({
     super.key,
     required this.latestRates,
     required this.currencies,
-    required this.getRate,
   });
 
   @override
