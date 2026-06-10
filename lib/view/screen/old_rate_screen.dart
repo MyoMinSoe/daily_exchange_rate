@@ -4,20 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-import '../../model/currencies_model.dart';
 import '../../model/old_rate_model.dart';
-import '../../service/api_service.dart';
+import '../../view_model/currencies_provider.dart';
 import '../../view_model/riverpod_old_rate/date_pick_provider.dart';
 import '../../view_model/riverpod_old_rate/old_rate_notifier.dart';
 import '../widget/failed_widget.dart';
 import '../widget/loading_widget.dart';
 import '../widget/old_rate_list_widget.dart';
+import '../widget/refresh_textbotton_widget.dart';
 
 // ignore: must_be_immutable
 class OldRateScreen extends ConsumerWidget {
-  OldRateScreen({super.key});
-
-  CurrenciesModel? currencies;
+  const OldRateScreen({super.key});
 
   Future<void> _selectDate(BuildContext context, WidgetRef ref) async {
     final searchDate = ref.read(oldRateDateProvider);
@@ -38,7 +36,6 @@ class OldRateScreen extends ConsumerWidget {
         ref.read(oldRateProvider.notifier).getOldRate(formattedDate);
       }
     }
-    currencies = await ApiService().getCurrencies();
   }
 
   @override
@@ -46,11 +43,13 @@ class OldRateScreen extends ConsumerWidget {
     final Size size = MediaQuery.of(context).size;
     final findDate = ref.watch(oldRateDateProvider);
     final oldRateState = ref.watch(oldRateProvider);
+    final currenciesAsync = ref.watch(currenciesProvider);
     return Container(
-      padding: const EdgeInsets.all(16.0).w,
+      padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 5.h),
       width: size.width.w,
       height: size.height.h,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           TextButton.icon(
             onPressed: () => _selectDate(context, ref),
@@ -67,10 +66,14 @@ class OldRateScreen extends ConsumerWidget {
                 OldRateInitial() => const SizedBox(),
                 OldRateLoading() => const LoadingWidget(),
                 OldRateSuccess(oldRateModel: OldRateModel oldrate) =>
-                  OldRateListWidget(
-                    currencies: currencies,
-                    oldRateModel: oldrate,
-                    findDate: findDate,
+                  currenciesAsync.when(
+                    data: (currencies) => OldRateListWidget(
+                      currencies: currencies,
+                      oldRateModel: oldrate,
+                      findDate: findDate,
+                    ),
+                    error: (error, _) => Text('Failed Currency'),
+                    loading: () => const LoadingWidget(),
                   ),
                 OldRateFail(errorMsg: String error) => FailedWidget(
                   message: error,
@@ -78,6 +81,14 @@ class OldRateScreen extends ConsumerWidget {
                       ref.read(oldRateProvider.notifier).getOldRate(findDate),
                 ),
               },
+            ),
+          if (findDate != null)
+            refreshTextBotton(
+              onPress: () {
+                ref.read(oldRateProvider.notifier).getOldRate(findDate);
+                ref.invalidate(currenciesProvider);
+              },
+              text: 'နှုန်းထားများပြန်လည်ရယူရန်',
             ),
         ],
       ),

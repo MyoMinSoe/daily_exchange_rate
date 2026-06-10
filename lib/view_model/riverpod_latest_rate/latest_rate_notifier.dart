@@ -7,6 +7,7 @@ class LatestRateNotifier extends Notifier<LatestRateState> {
   ApiService apiService = ApiService();
   @override
   LatestRateState build() {
+    getLatestRates();
     return const LatestRateInitial();
   }
 

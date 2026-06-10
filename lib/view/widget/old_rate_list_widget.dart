@@ -19,8 +19,7 @@ class OldRateListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Container(
-      padding: EdgeInsets.all(16).w,
+    return SizedBox(
       width: size.width.w,
       height: size.height.h,
       child: Column(

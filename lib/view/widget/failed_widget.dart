@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FailedWidget extends StatelessWidget {
   final String message;
-  final Function() onRetry;
-  const FailedWidget({super.key, required this.message, required this.onRetry});
+  final Function()? onRetry;
+  const FailedWidget({super.key, required this.message, this.onRetry});
 
   @override
   Widget build(BuildContext context) {
