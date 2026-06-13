@@ -1,13 +1,13 @@
-import 'package:daily_exchange_rate/view_model/riverpod_old_rate/old_rate_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 import '../../model/old_rate_model.dart';
+import '../../utility/extension/extensions.dart';
 import '../../view_model/currencies_provider.dart';
 import '../../view_model/riverpod_old_rate/date_pick_provider.dart';
 import '../../view_model/riverpod_old_rate/old_rate_notifier.dart';
+import '../../view_model/riverpod_old_rate/old_rate_state.dart';
 import '../widget/failed_widget.dart';
 import '../widget/loading_widget.dart';
 import '../widget/old_rate_list_widget.dart';
@@ -30,7 +30,7 @@ class OldRateScreen extends ConsumerWidget {
     );
 
     if (picked != null) {
-      final String formattedDate = DateFormat('dd-MM-yyyy').format(picked);
+      final String formattedDate = picked.dateToString();
       if (formattedDate != searchDate) {
         ref.read(oldRateDateProvider.notifier).setDate(formattedDate);
         ref.read(oldRateProvider.notifier).getOldRate(formattedDate);
@@ -40,14 +40,13 @@ class OldRateScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Size size = MediaQuery.of(context).size;
     final findDate = ref.watch(oldRateDateProvider);
     final oldRateState = ref.watch(oldRateProvider);
     final currenciesAsync = ref.watch(currenciesProvider);
     return Container(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 5.h),
-      width: size.width.w,
-      height: size.height.h,
+      width: context.screenWidth,
+      height: context.screenHeight,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

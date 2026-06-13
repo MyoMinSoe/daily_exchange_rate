@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 import '../../model/currencies_model.dart';
 import '../../model/latest_rate_model.dart';
+import '../../utility/extension/extensions.dart';
 import 'rate_curency_card.dart';
 
 class LatestRateWidget extends StatelessWidget {
@@ -17,11 +17,7 @@ class LatestRateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var dateTime = DateTime.fromMillisecondsSinceEpoch(
-      int.parse(latestRates.timestamp ?? '0') * 1000,
-    ).toLocal();
-
-    var time = DateFormat('MMMM d, yyyy - hh:mm a').format(dateTime);
+    var dateTime = latestRates.timestamp!.dateTimeToLocal();
 
     return ListView(
       children: [
@@ -29,7 +25,7 @@ class LatestRateWidget extends StatelessWidget {
           latestRates.info ?? 'No data available',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
+            color: context.theme.colorScheme.primary,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -38,12 +34,12 @@ class LatestRateWidget extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 12.sp,
-            color: Theme.of(context).colorScheme.secondary,
+            color: context.theme.colorScheme.secondary,
           ),
         ),
-        SizedBox(height: 16.h),
+        16.h.sizedboxHeight,
         Text(
-          'နောက်ဆုံးရရှိထားသောအချိန်\n$time',
+          'နောက်ဆုံးရရှိထားသောအချိန်\n${dateTime.dateToString()}',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 16.sp,
@@ -51,36 +47,36 @@ class LatestRateWidget extends StatelessWidget {
             height: 2.h,
           ),
         ),
-        SizedBox(height: 10.h),
+        10.h.sizedboxHeight,
         RateCurencyCard(
           currency: currencies?.currencies == null
               ? 'N/A'
               : '${currencies?.currencies?.uSD} - USD',
-          rate: '${latestRates.rates?.uSD} Ks',
+          rate: '${latestRates.rates?.uSD?.toMMNumber()} ကျပ်',
         ),
         RateCurencyCard(
           currency: currencies?.currencies == null
               ? 'N/A'
               : '${currencies?.currencies?.eUR} - EUR',
-          rate: '${latestRates.rates?.eUR} Ks',
+          rate: '${latestRates.rates?.eUR?.toMMNumber()} ကျပ်',
         ),
         RateCurencyCard(
           currency: currencies?.currencies == null
               ? 'N/A'
               : '${currencies?.currencies?.jPY} - JPY',
-          rate: '${latestRates.rates?.jPY} Ks',
+          rate: '${latestRates.rates?.jPY?.toMMNumber()} ကျပ်',
         ),
         RateCurencyCard(
           currency: currencies?.currencies == null
               ? 'N/A'
               : '${currencies?.currencies?.tHB} - THB',
-          rate: '${latestRates.rates?.tHB} Ks',
+          rate: '${latestRates.rates?.tHB?.toMMNumber()} ကျပ်',
         ),
         RateCurencyCard(
           currency: currencies?.currencies == null
               ? 'N/A'
               : '${currencies?.currencies?.sGD} - SGD',
-          rate: '${latestRates.rates?.sGD} Ks',
+          rate: '${latestRates.rates?.sGD?.toMMNumber()} ကျပ်',
         ),
       ],
     );
