@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utility/theme_data/theme_provider.dart';
-import '../../view_model/bottom_nav_index.dart';
+import '../../utility/custom_btn_navigator/bottom_nav_index.dart';
 import 'old_rate_screen.dart';
 import 'others_screen.dart';
 import 'popular_screen.dart';

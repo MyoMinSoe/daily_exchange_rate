@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../utility/extension/extensions.dart';
+
 class FailedWidget extends StatelessWidget {
   final String message;
   final Function()? onRetry;
@@ -13,7 +15,7 @@ class FailedWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(message),
-          SizedBox(height: 16.h),
+          16.h.sizedboxHeight,
           ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
         ],
       ),

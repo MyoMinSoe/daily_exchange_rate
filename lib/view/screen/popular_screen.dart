@@ -1,11 +1,12 @@
-import 'package:daily_exchange_rate/view_model/riverpod_latest_rate/latest_rate_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../model/latest_rate_model.dart';
+import '../../utility/extension/extensions.dart';
 import '../../view_model/currencies_provider.dart';
 import '../../view_model/riverpod_latest_rate/latest_rate_notifier.dart';
+import '../../view_model/riverpod_latest_rate/latest_rate_state.dart';
 import '../widget/failed_widget.dart';
 import '../widget/latest_rate_widget.dart';
 import '../widget/loading_widget.dart';
@@ -16,14 +17,13 @@ class PopularScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Size size = MediaQuery.of(context).size;
     final latestRateState = ref.watch(latestRateProvider);
     final currenciesAsync = ref.watch(currenciesProvider);
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 5.h),
-        width: size.width.w,
-        height: size.height.h,
+        width: context.screenWidth,
+        height: context.screenHeight,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
