@@ -1,5 +1,3 @@
-<img width="128" height="128" alt="image" src="https://github.com/user-attachments/assets/672724c7-98eb-4f4d-8b91-907840022570" />
-
 # daily_exchange_rate
 ## 📝 App အကြောင်း မိတ်ဆက်
 This Flutter project will be able to watch international daily exchange rate for myanmar kyat.<br>
@@ -10,7 +8,7 @@ UI ပိုင်းကို သပ်ရပ်ပြီးမျက်စိ�
 
 ဒီ Project ကို Flutter (Riverpod State Management) သုံးပြီး အကောင်းဆုံး တည်ဆောက်ထားပါတယ်။
 
-### Package တွေကတော့ - 
+### အောက်ပါ Package🧰 တွေကိုအသုံးပြုထားပါတယ် - 
   go_router<br>
   flutter_riverpod<br>
   dio<br>
@@ -19,7 +17,7 @@ UI ပိုင်းကို သပ်ရပ်ပြီးမျက်စိ�
   flutter_screenutil<br>
   freezed_annotation<br>
   json_annotation<br>
-> 💡 **Dev_dependencies**<br>
+> ⚙️ **Dev_dependencies**<br>
   flutter_launcher_icons<br>
   freezed<br>
   json_serializable<br>
