@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-import '../model/currencies_model.dart';
-import '../model/latest_rate_model.dart';
-import '../model/old_rate_model.dart';
+import '../model/currencies_model/currencies_model.dart';
+import '../model/latest_rate_model/latest_rate_model.dart';
+import '../model/old_rate_model/old_rate_model.dart';
 import 'api_constant.dart';
 
 class ApiService {

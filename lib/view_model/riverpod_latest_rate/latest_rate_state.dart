@@ -1,4 +1,4 @@
-import '../../model/latest_rate_model.dart';
+import '../../model/latest_rate_model/latest_rate_model.dart';
 
 sealed class LatestRateState {
   const LatestRateState();

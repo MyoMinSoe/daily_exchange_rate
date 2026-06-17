@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../model/old_rate_model.dart';
+import '../../model/old_rate_model/old_rate_model.dart';
 import '../../utility/extension/extensions.dart';
 import '../../view_model/currencies_provider.dart';
 import '../../view_model/riverpod_old_rate/date_pick_provider.dart';

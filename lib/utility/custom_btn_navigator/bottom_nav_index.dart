@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final bottomNavIndexProvider = NotifierProvider<BottomNavIndex, int>(() {
-  return BottomNavIndex();
-});
+final bottomNavIndexProvider = NotifierProvider<BottomNavIndex, int>(
+  () => BottomNavIndex(),
+);
 
 class BottomNavIndex extends Notifier<int> {
   @override

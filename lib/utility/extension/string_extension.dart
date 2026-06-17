@@ -14,7 +14,8 @@ extension StringExtensions on String {
       .replaceAll('7', '၇')
       .replaceAll('8', '၈')
       .replaceAll('9', '၉')
-      .replaceAll('0', '၀');
+      .replaceAll('0', '၀')
+      .replaceAll('', '');
 
   DateTime dateTimeToLocal() {
     return DateTime.fromMillisecondsSinceEpoch(

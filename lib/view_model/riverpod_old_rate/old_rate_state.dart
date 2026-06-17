@@ -1,4 +1,4 @@
-import '../../model/old_rate_model.dart';
+import '../../model/old_rate_model/old_rate_model.dart';
 
 sealed class OldRateState {
   const OldRateState();
