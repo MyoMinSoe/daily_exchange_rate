@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../model/old_rate_model.dart';
+import '../../model/old_rate_model/old_rate_model.dart';
 import '../../service/api_service.dart';
 import 'old_rate_state.dart';
 

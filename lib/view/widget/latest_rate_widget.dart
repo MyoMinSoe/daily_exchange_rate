@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../model/currencies_model.dart';
-import '../../model/latest_rate_model.dart';
+import '../../model/currencies_model/currencies_model.dart';
+import '../../model/latest_rate_model/latest_rate_model.dart';
 import '../../utility/extension/extensions.dart';
 import 'rate_curency_card.dart';
 
 class LatestRateWidget extends StatelessWidget {
   final LatestRateModel latestRates;
-  final CurrenciesModel? currencies;
+  final CurrenciesModel currencies;
+  static const _popularCodes = ['USD', 'EUR', 'JPY', 'SGD', 'THB'];
   const LatestRateWidget({
     super.key,
     required this.latestRates,
     required this.currencies,
   });
-
   @override
   Widget build(BuildContext context) {
-    var dateTime = latestRates.timestamp!.dateTimeToLocal();
+    final DateTime dateTime = latestRates.timestamp.dateTimeToLocal();
+    final Map<String, String> rates = latestRates.rates;
+    final Map<String, String> currencyNames = currencies.currencies;
 
     return ListView(
       children: [
         Text(
-          latestRates.info ?? 'No data available',
+          latestRates.info,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: context.theme.colorScheme.primary,
@@ -30,7 +32,7 @@ class LatestRateWidget extends StatelessWidget {
           ),
         ),
         Text(
-          latestRates.description ?? 'No data available',
+          latestRates.description,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 12.sp,
@@ -48,35 +50,13 @@ class LatestRateWidget extends StatelessWidget {
           ),
         ),
         10.h.sizedboxHeight,
-        RateCurencyCard(
-          currency: currencies?.currencies == null
-              ? 'N/A'
-              : '${currencies?.currencies?.uSD} - USD',
-          rate: '${latestRates.rates?.uSD?.toMMNumber()} ကျပ်',
-        ),
-        RateCurencyCard(
-          currency: currencies?.currencies == null
-              ? 'N/A'
-              : '${currencies?.currencies?.eUR} - EUR',
-          rate: '${latestRates.rates?.eUR?.toMMNumber()} ကျပ်',
-        ),
-        RateCurencyCard(
-          currency: currencies?.currencies == null
-              ? 'N/A'
-              : '${currencies?.currencies?.jPY} - JPY',
-          rate: '${latestRates.rates?.jPY?.toMMNumber()} ကျပ်',
-        ),
-        RateCurencyCard(
-          currency: currencies?.currencies == null
-              ? 'N/A'
-              : '${currencies?.currencies?.tHB} - THB',
-          rate: '${latestRates.rates?.tHB?.toMMNumber()} ကျပ်',
-        ),
-        RateCurencyCard(
-          currency: currencies?.currencies == null
-              ? 'N/A'
-              : '${currencies?.currencies?.sGD} - SGD',
-          rate: '${latestRates.rates?.sGD?.toMMNumber()} ကျပ်',
+        ..._popularCodes.map(
+          (code) => RateCurencyCard(
+            currency: currencyNames.containsKey(code)
+                ? '${currencyNames[code]} - $code'
+                : code,
+            rate: '${(rates[code] ?? '').toMMNumber()} ကျပ်',
+          ),
         ),
       ],
     );

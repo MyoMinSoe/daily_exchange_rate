@@ -1,4 +1,4 @@
-import '../../model/latest_rate_model.dart';
+import '../../model/latest_rate_model/latest_rate_model.dart';
 import '../../service/api_service.dart';
 import 'latest_rate_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

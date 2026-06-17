@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../model/latest_rate_model.dart';
+import '../../model/latest_rate_model/latest_rate_model.dart';
 import '../../utility/extension/extensions.dart';
 import '../../view_model/currencies_provider.dart';
 import '../../view_model/riverpod_latest_rate/latest_rate_notifier.dart';
