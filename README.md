@@ -34,7 +34,7 @@ Happy Life ❤️‍🔥
 App ကို စမ်းသုံးကြည့်ချင်ရင် အောက်က Link မှာ APK ရယူနိုင်ပါတယ် -
 
 
-[![Download APK](https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android)]((https://github.com/MyoMinSoe/daily_exchange_rate/releases/download/v1.0.0/app-release.apk))
+[![Download APK](https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android)](https://github.com/MyoMinSoe/daily_exchange_rate/releases/download/v1.0.0/app-release.apk)
 
 ## 🖼️ App Preview
 <p float="left">
